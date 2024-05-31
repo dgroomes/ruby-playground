@@ -1,0 +1,4 @@
+.idea/
+
+# Let's ignore '.ruby-version' because it's a personal choice to use rbenv. This repository is focused on core Ruby.
+.ruby-version
