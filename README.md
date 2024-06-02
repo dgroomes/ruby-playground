@@ -24,7 +24,7 @@ Follow these instructions to explore Ruby via various scripts and programs.
    * ```text
      $ ruby hello_world.rb 
      
-     Hello World!
+     Hello programmer 👋 You rock with 100% intensity!
      ```
    * Using Ruby directly is great for learning and writing scripts (even sophisticated ones) that use only the Ruby
      standard library and pre-installed Gems (packages). But, we eventually need to expand our program to include
@@ -62,6 +62,37 @@ Follow these instructions to explore Ruby via various scripts and programs.
      env = Envelope.new("hello")
      env.message
      ```
+5. Debug a program
+   * ```shell
+     bundle exec rdbg hello_world.rb
+     ```
+   * Use the power of the debugger to interactively step through the code, inspect variables and change the program
+     state. My exploration looked like the following.
+   * ```text
+     $ bundle exec rdbg hello_world.rb
+     [1, 6] in hello_world.rb
+          1| # frozen_string_literal: true
+          2| 
+     =>   3| msg_template = "Hello %s 👋 You rock with %s%% intensity!"
+          4| msg = msg_template % ['programmer', 100]
+          5| 
+          6| puts msg
+     =>#0    <main> at hello_world.rb:3
+     (rdbg) s    # step command
+     [1, 6] in hello_world.rb
+          1| # frozen_string_literal: true
+          2| 
+          3| msg_template = "Hello %s 👋 You rock with %s%% intensity!"
+     =>   4| msg = msg_template % ['programmer', 100]
+          5| 
+          6| puts msg
+     =>#0    <main> at hello_world.rb:4
+     (ruby) msg_template = "Hello from the debugger"
+     "Hello from the debugger"
+     (rdbg) c    # continue command
+     Hello from the debugger
+     ```
+     
    
 
 ## Wish List
@@ -78,7 +109,7 @@ General clean-ups, TODOs and things I wish to implement for this project:
    * DONE Add instructions for bundle install and running hello_world.rb with a specific version of irb.
 * [ ] How does modularization work in Ruby? Packages?
    * How are files discovered? Is there a search path?
-* [ ] How does debugging work in Ruby? Does it have something like an agent, like the JVM does?
+* [x] DONE How does debugging work in Ruby? Does it have something like an agent, like the JVM does?
 * [ ] What is `frozen_string_literal`?
 * [x] DONE (I mostly get it. The top-level self is "main". And the really tricky part is that in class initialization,
   "self" is actually the class so that's why `def self.hello ...` is actually a class-level variable even though it
