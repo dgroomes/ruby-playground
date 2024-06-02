@@ -26,42 +26,35 @@ Follow these instructions to explore Ruby via various scripts and programs.
      
      Hello World!
      ```
-3. Write Ruby interactively
+   * Using Ruby directly is great for learning and writing scripts (even sophisticated ones) that use only the Ruby
+     standard library and pre-installed Gems (packages). But, we eventually need to expand our program to include
+     third-party packages. We do this in all programming languages. Let's jump right into Bundler and figure out how to
+     manage our project and development workflow using the idiomatic Ruby toolchains.
+3. Install packages
+   * ```shell
+     bundle install
+     ```
+   * This installs the packages listed in `Gemfile.lock`. We are depending on the `irb` and `debug` gems which we will
+     explore next.
+4. Write Ruby interactively
    * Start an interactive Ruby REPL (irb is short for "interactive Ruby") with the following command.
    * ```shell
-     irb
+     bundle exec irb
      ```
    * Try out some code. This is a fast way to validate your understanding of Ruby syntax and a low stakes way to try out
      some random code. Here is what my exploration looked like.
    * ```text
-     ❯ irb
-     irb(main):001> date
-     (irb):1:in `<main>': undefined local variable or method `date' for main (NameError)
-     
-     date
-     ^^^^
-             from <internal:kernel>:187:in `loop'
-             from /Users/davidgroomes/.rbenv/versions/3.3.2/lib/ruby/gems/3.3.0/gems/irb-1.13.1/exe/irb:9:in `<top (required)>'
-             from /Users/davidgroomes/.rbenv/versions/3.3.2/bin/irb:25:in `load'
-             from /Users/davidgroomes/.rbenv/versions/3.3.2/bin/irb:25:in `<main>'
-     irb(main):002> puts
-     
-     => nil
-     irb(main):003> puts :hi if true
+     $ bundle exec irb
+     irb(main):001> puts :hi if true
      hi
      => nil
-     irb(main):004> :hi.inspect
+     irb(main):002> :hi.inspect
      => ":hi"
-     irb(main):005> :hi.inspect.inspect
+     irb(main):003> :hi.inspect.inspect
      => "\":hi\""
-     irb(main):006> :hi.inspect.inspect.inspect
-     => "\"\\\":hi\\\"\""
-     irb(main):007> :hi.class
+     irb(main):004> :hi.class
      => Symbol
-     irb(main):008> :hi.class.inspect
-     => "Symbol"
-     irb(main):009> :hi.class.inspect.class
-     => String
+     irb(main):005>
      ```
    * Try sourcing some code and using it. Use the following command from the Ruby REPL.
    * ```text
@@ -69,17 +62,20 @@ Follow these instructions to explore Ruby via various scripts and programs.
      env = Envelope.new("hello")
      env.message
      ```
-     
+   
 
 ## Wish List
 
 General clean-ups, TODOs and things I wish to implement for this project:
 
 * [x] DONE Let's get something running
-* [ ] How does package management work? Ruby Gems of course, but what is the package manager?
+* [x] DONE (interestingly, Bundler comes pre-installed with Ruby these days) How does package management work? Ruby Gems of course, but what is the package manager?
    * I think I'd like to combine some toolchain/package stuff with type checking (Sorbet). I know type checking isn't
      really the spirit of Ruby but Homebrew does it and that's what I'm trying to study, plus I benefit from types once
      we expand past a small program size.
+   * DONE (you have to make it yourself. Perfectly fine.) Init a Gemfile
+   * DONE (`bundle add debug --version '1.9.2'`) Add 'debug' to the Gemfile
+   * DONE Add instructions for bundle install and running hello_world.rb with a specific version of irb.
 * [ ] How does modularization work in Ruby? Packages?
    * How are files discovered? Is there a search path?
 * [ ] How does debugging work in Ruby? Does it have something like an agent, like the JVM does?
